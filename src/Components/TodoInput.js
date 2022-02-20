@@ -1,10 +1,11 @@
-import React from "react";
+import React, {Component} from 'react';
+import '../Style/TodoInput.css'
 
-class TodoInput extends React.Component {
+class TodoInput extends Component {
     render() {
         return (
             <div className="todo-input">
-                <input type="text" placeholder="New Task.." />
+                <div class="input"><input type="text" placeholder="New Task.." /></div>
             </div>
         )
     }

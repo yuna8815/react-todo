@@ -1,39 +1,58 @@
-import React from "react";
+import React, {Component} from 'react';
+import '../Style/TodoList.css'
 
-class TodoList extends React.Component {
+class TodoList extends Component {
+    getTodoItems(category) {
+        const lists = [];
+        category.forEach((data) => {
+            if(data.checked) {
+                lists.push(
+                    <li key={data.id} onChange={function() {
+                            this.setState({
+                                category: []
+                            });
+                        }
+                    }>
+                        <input type="checkbox" id={data.id} checked={data.checked}></input>
+                        <label htmlFor={data.id}><del>{data.label}</del></label>
+                    </li>
+                );
+            }
+            else {
+                lists.push(
+                    <li key={data.id}>
+                        <input type="checkbox" id={data.id} checked={data.checked}></input>
+                        <label htmlFor={data.id}>{data.label}</label>
+                    </li>
+                );
+            }
+        });
+        return lists;
+    };
+
     render() {
+        const incomplete = this.props.incomplete;
+        const complete = this.props.complete;
+
         return (
-            <div className="todo-list">
+            <main className="todo-list">
                 <section>
                     <h2>Incomplete</h2>
                     <ul>
-                        <li>
-                            <input type="checkbox" id="incomplete-lists1"></input>
-                            <label for="incomplete-lists1">Incomplete Task Lists!</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="incomplete-lists2"></input>
-                            <label for="incomplete-lists2">Incomplete Task Lists!</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="incomplete-lists3"></input>
-                            <label for="incomplete-lists3">Incomplete Task Lists!</label>
-                        </li>
+                        {this.getTodoItems(incomplete)}
                     </ul>
                 </section>
-
+        
                 <section>
                     <h2>Complete</h2>
                     <ul>
-                        <li>
-                            <input type="checkbox" id="complete-lists1"></input>
-                            <label for="complete-lists1">Complete Task Lists!</label>
-                        </li>
+                        {this.getTodoItems(complete)}
                     </ul>
                 </section>
-            </div>
+            </main>
         )
     }
+    
 }
 
 export default TodoList;

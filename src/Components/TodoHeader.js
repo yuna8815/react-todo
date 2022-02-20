@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {Component} from 'react';
+import '../Style/TodoHeader.css'
 
-class TodoHeader extends React.Component {
+class TodoHeader extends Component {
     render() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const month = months[now.getMonth()];
+        const date = now.getDate();
+
+        const incomplete = this.props.incomplete;
+        const complete = this.props.complete;
+
         return (
             <header className="todo-header">
-                <h1>March 15, 2022</h1>
-                <ul>
-                    <li><b>4</b> Incomplete</li>
-                    <li><b>2</b> Complete</li>
-                </ul>
+                <h1>{month} {date}, {year}</h1>
+
+                <p><b>{incomplete}</b> Incomplete, <b>{complete}</b> Complete</p>
             </header>
         )
     }
