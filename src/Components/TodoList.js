@@ -1,58 +1,37 @@
-import React, {Component} from 'react';
-import '../Style/TodoList.css'
+import TodoItem from './TodoItem';
+import styled from 'styled-components';
 
-class TodoList extends Component {
-    getTodoItems(category) {
-        const lists = [];
-        category.forEach((data) => {
-            if(data.checked) {
-                lists.push(
-                    <li key={data.id} onChange={function() {
-                            this.setState({
-                                category: []
-                            });
-                        }
-                    }>
-                        <input type="checkbox" id={data.id} checked={data.checked}></input>
-                        <label htmlFor={data.id}><del>{data.label}</del></label>
-                    </li>
-                );
-            }
-            else {
-                lists.push(
-                    <li key={data.id}>
-                        <input type="checkbox" id={data.id} checked={data.checked}></input>
-                        <label htmlFor={data.id}>{data.label}</label>
-                    </li>
-                );
-            }
-        });
-        return lists;
-    };
+const TodoListBlock = styled.div`
+    width: 100%;
+    padding: 12px;
 
-    render() {
-        const incomplete = this.props.incomplete;
-        const complete = this.props.complete;
-
-        return (
-            <main className="todo-list">
-                <section>
-                    <h2>Incomplete</h2>
-                    <ul>
-                        {this.getTodoItems(incomplete)}
-                    </ul>
-                </section>
-        
-                <section>
-                    <h2>Complete</h2>
-                    <ul>
-                        {this.getTodoItems(complete)}
-                    </ul>
-                </section>
-            </main>
-        )
+    @media screen and (min-width: 512px) {
+        width: 512px;
+        margin: 0 auto;
     }
-    
+
+    section {
+        padding: 12px 0;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        margin: 12px 16px;
+        font-size: 20px;
+    }
+`;
+
+function TodoList () {
+    return (
+        <TodoListBlock>
+            <section>
+                <h2>할 일 리스트</h2>
+                <TodoItem text="프로젝트 생성하기" done={true} />
+                <TodoItem text="기능 구현하기" done={false} />
+            </section>
+        </TodoListBlock>
+    );
 }
 
 export default TodoList;
