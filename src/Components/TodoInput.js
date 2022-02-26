@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const TodoInputPositioner = styled.div`
     position: absolute;
@@ -22,14 +24,41 @@ const Input = styled.input`
     color: #202020;
     border: solid 1px #EEF6FF;
     border-radius: 4px;
-    &::placeholder {color: #6B7280;}
+    &::placeholder {
+        color: #6B7280;
+    }
 `;
 
 function TodoInput () {
+    const [value, setValue] = useState('');
+    const dispatch = useTodoDispatch();
+    const nextId = useTodoNextId();
+
+    const onChange = e => setValue(e.target.value);
+    const onSubmit = e => {
+        //  새로고침 방지
+        e.preventDefault();
+        dispatch({
+            type: 'CREATE',
+            todo: {
+                id: nextId.current,
+                text: value,
+                done: false
+            }
+        });
+        setValue('');
+        nextId.current += 1;
+    };
+
     return (
         <TodoInputPositioner>
-            <TodoInputForm>
-                <Input placeholder="New Task.." />
+            <TodoInputForm onSubmit={onSubmit}>
+                <Input
+                    value={value}
+                    autoFocus
+                    placeholder="입력 후 Enter를 누르세요 😊"
+                    onChange={onChange}
+                />
             </TodoInputForm>
         </TodoInputPositioner>
     )

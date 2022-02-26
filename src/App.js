@@ -4,12 +4,9 @@ import TodoHeade from './Components/TodoHead';
 import TodoList from './Components/TodoList';
 import TodoInput from './Components/TodoInput';
 import { createGlobalStyle } from 'styled-components';
+import { TodoProvider } from './TodoContext';
 
 const GlobalStyle = createGlobalStyle`
-  .App {
-    padding-bottom: 80px;
-  }
-
   hr {
     margin: 0;
     height: 1px;
@@ -21,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <TodoProvider>
         <GlobalStyle />
         <TodoTemplate>
           <TodoHeade />
@@ -29,7 +26,7 @@ class App extends Component {
           <TodoList />
           <TodoInput />
         </TodoTemplate>
-      </div>
+      </TodoProvider>
     );
   }
 }
