@@ -2,19 +2,16 @@ import TodoItem from './TodoItem';
 import styled from 'styled-components';
 import { useTodoState } from '../TodoContext';
 
-const TodoListBlock = styled.div`
-    width: 100%;
-    padding: 12px;
+const TodoListBlock = styled.section`
+    flex: 1;
+    padding: 12px 0;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 
-    @media screen and (min-width: 512px) {
-        width: 512px;
-        margin: 0 auto;
-    }
+    & + section {margin: 16px 0 0;}
 
-    section {
-        padding: 12px 0;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+    @media screen and (min-width: 960px) {
+        & + section {margin: 0 0 0 16px;}
     }
 
     h2 {
@@ -23,21 +20,23 @@ const TodoListBlock = styled.div`
     }
 `;
 
-function TodoList () {
+function TodoList ({ title, checked }) {
     const todos = useTodoState();
     return (
         <TodoListBlock>
-            <section>
-                <h2>할 일 리스트</h2>
-                {todos.map(todo => (
+            <h2>{title}</h2>
+            {todos.map(todo => {
+                if (checked !== todo.done) return null;
+
+                return (
                     <TodoItem
                         key={todo.id}
                         id={todo.id}
                         text={todo.text}
                         done={todo.done}
                     />
-                ))}
-            </section>
+                )}
+            )}
         </TodoListBlock>
     );
 }

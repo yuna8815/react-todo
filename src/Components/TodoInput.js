@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const TodoInputPositioner = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 100;
     padding: 12px;
 `;
 
 const TodoInputForm = styled.form`
-    @media screen and (min-width: 512px) {
-        width: 512px;
+    display: flex;
+    @media screen and (min-width: 960px) {
+        width: 960px;
         margin: 0 auto;
     }
 `;
 
 const Input = styled.input`
-    width: 100%;
+    flex: 1;
     height: 48px;
     padding: 0 8px;
     color: #202020;

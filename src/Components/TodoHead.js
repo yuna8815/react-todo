@@ -6,9 +6,9 @@ const TodoHeadBlock = styled.header`
     padding: 36px 24px;
     background-color: #F9FAFB;
 
-    @media screen and (min-width: 512px) {
+    @media screen and (min-width: 960px) {
         div {
-            width: 512px;
+            width: 960px;
             margin: 0 auto;
         }
     }

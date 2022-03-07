@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import TodoTemplate from './Components/TodoTemplate';
 import TodoHeade from './Components/TodoHead';
-import TodoList from './Components/TodoList';
+import TodoListTemplate from './Components/TodoListTemplate';
 import TodoInput from './Components/TodoInput';
 import { createGlobalStyle } from 'styled-components';
 import { TodoProvider } from './TodoContext';
@@ -23,7 +23,7 @@ class App extends Component {
         <TodoTemplate>
           <TodoHeade />
           <hr />
-          <TodoList />
+          <TodoListTemplate />
           <TodoInput />
         </TodoTemplate>
       </TodoProvider>
